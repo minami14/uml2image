@@ -24,3 +24,18 @@ wget -O plantuml.jar http://sourceforge.net/projects/plantuml/files/plantuml.jar
 ```bash
 ./uml2image [Your token]
 ```
+
+Write uml with discord as follows
+````    
+```uml
+@startuml
+Class01 <|-- Class02
+Class03 *-- Class04
+Class05 o-- Class06
+Class07 .. Class08
+Class09 -- Class10
+@enduml
+```
+````
+
+![example](https://raw.githubusercontent.com/minami14/uml2image/master/example.png)
