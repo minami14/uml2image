@@ -6,7 +6,7 @@ Install JRE(or JDK) and Graphviz in advance.
 
 clone uml2image.
 ```bash
-git clone github.com/minami14/uml2image
+git clone https://github.com/minami14/uml2image
 ```
 
 build uml2image.
