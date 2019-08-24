@@ -2,9 +2,12 @@
 uml2image is discord bot to convert uml to image.
 
 # Install
-Install JRE(or JDK) and Graphviz in advance.
+Install JRE(or JDK) and Graphviz.
+```bash
+sudo apt install default-jre graphviz
+```
 
-clone uml2image.
+clone this repository.
 ```bash
 git clone https://github.com/minami14/uml2image
 ```
