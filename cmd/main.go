@@ -36,6 +36,10 @@ func umlToImage(uml string) (*os.File, error) {
 func onMessage(s *discordgo.Session, m *discordgo.MessageCreate) {
 	if strings.HasPrefix(m.Content, "```uml") && strings.HasSuffix(m.Content, "```") {
 		image, err := umlToImage(m.Content[6 : len(m.Content)-3])
+		defer func() {
+			_ = image.Close()
+		}()
+
 		if err != nil {
 			log.Println(err)
 			_, err := s.ChannelMessageSend(m.ChannelID, "Failed to convert uml")
