@@ -1,7 +1,6 @@
 package main
 
 import (
-	"io"
 	"log"
 	"os"
 	"os/exec"
@@ -11,7 +10,7 @@ import (
 	"github.com/google/uuid"
 )
 
-func umlToImage(uml string) (io.Reader, error) {
+func umlToImage(uml string) (*os.File, error) {
 	uid := uuid.New().String()
 	umlFileName := "uml/" + uid + ".pu"
 	umlFile, err := os.Create(umlFileName)
