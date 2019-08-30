@@ -10,6 +10,29 @@ import (
 	"github.com/google/uuid"
 )
 
+func trimSpaceAndNewLine(s string) string {
+	s = strings.TrimSpace(s)
+	s = strings.Trim(s, "\n")
+	s = strings.Trim(s, "\r")
+	return s
+}
+
+func formatUml(uml string) string {
+	uml = trimSpaceAndNewLine(uml)
+
+	if !strings.HasPrefix(uml, "@startuml") {
+		uml = "@startuml\n" + uml
+	}
+
+	uml = trimSpaceAndNewLine(uml)
+
+	if !strings.HasSuffix(uml, "@enduml") {
+		uml = uml + "\n@enduml"
+	}
+
+	return uml
+}
+
 func umlToImage(uml string) (*os.File, error) {
 	uid := uuid.New().String()
 	umlFileName := "uml/" + uid + ".pu"
@@ -20,6 +43,8 @@ func umlToImage(uml string) (*os.File, error) {
 	defer func() {
 		_ = umlFile.Close()
 	}()
+
+	uml = formatUml(uml)
 
 	if _, err := umlFile.Write([]byte(uml)); err != nil {
 		return nil, err
@@ -33,9 +58,24 @@ func umlToImage(uml string) (*os.File, error) {
 	return os.Open("uml/out/" + uid + ".png")
 }
 
+const (
+	prefix = "```uml"
+	suffix = "```"
+)
+
+func isUml(s string) bool {
+	return strings.HasPrefix(s, prefix) && strings.HasSuffix(s, suffix)
+}
+
+func extractUml(s string) string {
+	return s[len(prefix) : len(s)-len(suffix)]
+}
+
 func onMessage(s *discordgo.Session, m *discordgo.MessageCreate) {
-	if strings.HasPrefix(m.Content, "```uml") && strings.HasSuffix(m.Content, "```") {
-		image, err := umlToImage(m.Content[6 : len(m.Content)-3])
+	text := trimSpaceAndNewLine(m.Content)
+	if isUml(text) {
+		uml := extractUml(text)
+		image, err := umlToImage(uml)
 		defer func() {
 			_ = image.Close()
 		}()
