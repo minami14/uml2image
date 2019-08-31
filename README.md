@@ -1,4 +1,7 @@
 # uml2image
+[![Travis](https://travis-ci.org/minami14/uml2image.svg?branch=master)](https://travis-ci.org/minami14/uml2image)
+[![Go Report Card](https://goreportcard.com/badge/github.com/minami14/uml2image)](https://goreportcard.com/report/github.com/minami14/uml2image)
+
 uml2image is discord bot to convert uml to image.
 
 # Install
