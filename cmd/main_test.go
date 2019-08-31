@@ -11,7 +11,7 @@ func TestFormatUml(t *testing.T) {
 		uml(" class Sample "),
 		uml("\nclass Sample\n"),
 		uml("\n@startuml\nclass Sample\n@enduml\n"),
-		}
+	}
 
 	for _, s := range testData {
 		s = extractUml(s)
