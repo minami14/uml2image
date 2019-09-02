@@ -1,23 +1,13 @@
-FROM ubuntu:18.04
+FROM alpine:latest
+
+RUN apk add openjdk8-jre graphviz ttf-droid
 
 COPY uml2image uml2image
-
-COPY entrypoint.sh entrypoint.sh
 
 COPY plantuml.jar plantuml.jar
 
 COPY uml uml
 
-RUN chmod +x uml2image
+COPY entrypoint.sh entrypoint.sh
 
-RUN chmod +x entrypoint.sh
-
-RUN chmod +x plantuml.jar
-
-RUN apt update
-
-RUN apt upgrade -y
-
-RUN apt install -y default-jre graphviz
-
-ENTRYPOINT ["bash", "entrypoint.sh"]
+ENTRYPOINT ["ash", "entrypoint.sh"]

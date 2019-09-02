@@ -1,3 +1,3 @@
-#!/bin/bash
+#!/bin/ash
 
 ./uml2image $TOKEN
