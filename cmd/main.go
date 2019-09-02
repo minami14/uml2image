@@ -40,8 +40,15 @@ func umlToImage(uml string) (*os.File, error) {
 	if err != nil {
 		return nil, err
 	}
+
 	defer func() {
-		_ = umlFile.Close()
+		if err := umlFile.Close(); err != nil {
+			log.Println(err)
+		}
+
+		if err := os.Remove(umlFile.Name()); err != nil {
+			log.Println(err)
+		}
 	}()
 
 	uml = formatUml(uml)
@@ -77,7 +84,13 @@ func onMessage(s *discordgo.Session, m *discordgo.MessageCreate) {
 		uml := extractUml(text)
 		image, err := umlToImage(uml)
 		defer func() {
-			_ = image.Close()
+			if err := image.Close(); err != nil {
+				log.Println(err)
+			}
+
+			if err := os.Remove(image.Name()); err != nil {
+				log.Println(err)
+			}
 		}()
 
 		if err != nil {
