@@ -7,7 +7,7 @@ uml2image is discord bot to convert uml to image.
 # Install
 ### Docker
 ```bash
-docker run -d -e Token[Your token] minami14/uml2image
+docker run -d -e TOKEN=[Your token] minami14/uml2image
 ```
 
 ### Binary
