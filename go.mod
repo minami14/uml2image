@@ -4,5 +4,5 @@ go 1.15
 
 require (
 	github.com/bwmarrin/discordgo v0.22.1
-	github.com/google/uuid v1.1.5
+	github.com/google/uuid v1.2.0
 )
